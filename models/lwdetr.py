@@ -143,6 +143,8 @@ class LWDETR(nn.Module):
             refpoint_embed_weight = self.refpoint_embed.weight[:self.num_queries]
             query_feat_weight = self.query_feat.weight[:self.num_queries]
 
+        # hs:     hidden states — decoder outputs per layer, shape [N_layers, B, N_q, d_model]
+        # hs_enc: encoder hidden states used by the two-stage proposal head
         hs, ref_unsigmoid, hs_enc, ref_enc = self.transformer(
             srcs, masks, poss, refpoint_embed_weight, query_feat_weight)
 
@@ -179,6 +181,7 @@ class LWDETR(nn.Module):
         refpoint_embed_weight = self.refpoint_embed.weight[:self.num_queries]
         query_feat_weight = self.query_feat.weight[:self.num_queries]
 
+        # hs: hidden states — decoder outputs per layer, shape [N_layers, B, N_q, d_model]
         hs, ref_unsigmoid, hs_enc, ref_enc = self.transformer(
             srcs, None, poss, refpoint_embed_weight, query_feat_weight)
 

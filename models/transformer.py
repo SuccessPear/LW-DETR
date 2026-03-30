@@ -275,6 +275,7 @@ class Transformer(nn.Module):
             else:
                 refpoint_embed = refpoint_embed + refpoint_embed_ts
 
+        # hs: hidden states — stacked decoder output per layer, shape [N_layers, B, N_q, d_model]
         hs, references = self.decoder(tgt, memory, memory_key_padding_mask=mask_flatten,
                           pos=lvl_pos_embed_flatten, refpoints_unsigmoid=refpoint_embed,
                           level_start_index=level_start_index, 
@@ -406,7 +407,7 @@ class TransformerDecoder(nn.Module):
         if self.return_intermediate:
             if self._export:
                 # to shape: B, N, C
-                hs = intermediate[-1]
+                hs = intermediate[-1]  # hs: hidden states (last decoder layer output)
                 if self.bbox_embed is not None:
                     ref = hs_refpoints_unsigmoid[-1]
                 else:
