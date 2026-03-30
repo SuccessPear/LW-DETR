@@ -37,6 +37,14 @@ LW-DETR is a light-weight detection tranformer, which outperforms YOLOs for real
   <img src='figures/LW_DETR.jpg' width = "80%">
 </p>
 
+### Decoder Block Diagram
+
+The diagram below illustrates the internal structure of the LW-DETR decoder, including the self-attention, multi-scale deformable cross-attention (MSDeformAttn), feed-forward network, iterative reference-point refinement, and the overall N-layer stack. In the code and diagram, **`hs` stands for "hidden states"** — the stacked decoder output tensors from each layer, with shape `[N_layers, B, N_q, d_model]`.
+
+<p align="center">
+  <img src='figures/decoder_block_diagram.png' width = "90%">
+</p>
+
 
 <a name='2'></a>
 
